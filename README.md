@@ -1,24 +1,30 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+rails API
 
-Things you may want to cover:
+https://apidock.com/rails
 
-* Ruby version
+--------------------------------------------
+echo "# test20180210b" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:Karliao/test20180210b.git
+git push -u origin master
 
-* System dependencies
+git push -u remote_repo local_brach
 
-* Configuration
+--------------------------------------------
 
-* Database creation
+<a href="about.html">About</a>
+about.html must be put in public directory
+link_to can only use controller path
 
-* Database initialization
 
-* How to run the test suite
+--------------------------------------------
 
-* Services (job queues, cache servers, search engines, etc.)
+  def index
+    # @topics = Topic.all
+    # @topics = Topic.all.order(votes: :desc)
+    @topics = Topic.joins("LEFT JOIN (SELECT topic_id, count(*) c from votes group by topic_id) v  on topics.id=v.topic_id").order("v.c DESC")
+  end
 
-* Deployment instructions
-
-* ...
